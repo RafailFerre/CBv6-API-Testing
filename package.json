@@ -1,11 +1,20 @@
 {
-  "name": "cbv6-api-testing",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Rafail Ferre",
-  "license": "ISC"
+    "name": "cbv6-api-testing",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "test": "mocha"
+    },
+    "keywords": [],
+    "author": "Rafail Ferre",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.24.5",
+        "@babel/preset-env": "^7.24.5",
+        "@babel/register": "^7.23.7",
+        "chai": "^4.4.1",
+        "mocha": "^10.4.0",
+        "prettier": "^3.2.5",
+        "supertest": "^7.0.0"
+    }
 }
