@@ -1,12 +1,13 @@
 import colors from 'colors';
 import { expect } from 'chai';
 import { login } from '../helpers/generalHelper';
+import { user } from '../helpers/user';
 
 describe('AUTHENTICATION', () => {
     let res;
     describe('POSITIVE'.green, () => {
         before(async () => {
-            res = await login(process.env.EMAIL, process.env.PASSWORD);
+            res = await login(user.email, user.password);
         });
         it('Verify response status when login with valid credentials', () => {
             expect(res.status).to.equal(200);
@@ -18,7 +19,7 @@ describe('AUTHENTICATION', () => {
     describe('NEGATIVE'.red, () => {
         describe('INVALID PASSWORD'.blue, () => {
             before(async () => {
-                res = await login(process.env.EMAIL, 'invalid password');
+                res = await login(user.email, 'invalid password');
             });
             it('Verify response status when login with invalid password', () => {
                 expect(res.status).to.eq(400);
@@ -29,7 +30,7 @@ describe('AUTHENTICATION', () => {
         });
         describe('INVALID EMAIL'.blue, () => {
             before(async () => {
-                res = await login('invalid email', process.env.PASSWORD);
+                res = await login('invalid email', user.password);
             });
             it('Verify response status when login with invalid email', async () => {
                 expect(res.status).to.eq(400);
