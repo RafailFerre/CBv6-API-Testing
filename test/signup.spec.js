@@ -108,9 +108,9 @@ describe('SIGNUP', () => {
             });
             it('Verify response status code', async () => {
                 expect(res.status).to.equal(400);
-                console.log(res.status);
-                console.log(res.body);
-                console.log(res.request._data);
+                // console.log(res.status);
+                // console.log(res.body);
+                // console.log(res.request._data);
             });
             it('Verify response message', async () => {
                 expect(res.body.message).contain('Wrong password format');
