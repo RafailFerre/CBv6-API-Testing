@@ -11,3 +11,12 @@ export const newUser = {
     email: chance.email(), 
     password: process.env.PASSWORD 
 }
+
+
+const newEmail = 'test_' + Date.now() + '@gmail.com';
+export const signupBody = {
+    firstName: chance.first(), 
+    lastName: chance.last(), 
+    email: newEmail, 
+    password: process.env.PASSWORD
+}
