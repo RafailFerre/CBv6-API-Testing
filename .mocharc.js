@@ -3,4 +3,11 @@ module.exports = {
     timeout: 15000,
     exclude: ['test/example.spec.js'],
     file: 'setup/global.js',
+    reporter: 'mochawesome',
+    reporterOptions: [
+        'json=false',
+        'quiet=true',
+        'reportDir=Reports',
+        'reportFilename=[status]_[datetime]_updatedReports',
+    ],
 };
