@@ -20,3 +20,13 @@ export function register(data) {
         .post('/user')
         .send(data)
 }
+
+export function emailSearch(email) {
+    return request('https://clientbase-server.herokuapp.com')
+    .post('/email/search')
+    .send({ email });
+}
+
+export function emailVerify(endPoint) {
+    return request('https://clientbase-server.herokuapp.com').get(endPoint).send()
+}
