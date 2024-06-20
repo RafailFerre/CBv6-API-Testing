@@ -8,6 +8,6 @@ module.exports = {
         'json=false',
         'quiet=true',
         'reportDir=Reports',
-        'reportFilename=[status]_[datetime]_updatedReports',
+        'reportFilename=[status]_updatedReports',
     ],
 };
