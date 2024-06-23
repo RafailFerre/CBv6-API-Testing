@@ -3,7 +3,10 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "test": "mocha",
+        "test": "mocha -- test/**",
+        "test-auth": "mocha -- test/auth.spec.js",
+        "test-signup": "mocha -- test/signup.spec.js",
+        "test-client": "mocha -- test/client/*.spec.js",
         "test-multiple": "node run-tests-multiple.js"
     },
     "keywords": [],

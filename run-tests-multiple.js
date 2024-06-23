@@ -12,4 +12,4 @@ const runTests = (times) => {
   }
 };
 
-runTests(3);
+runTests(5);
