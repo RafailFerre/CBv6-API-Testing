@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { client, createClient, getClient, updateClient } from '../../helpers/client.js';
 
-describe.only('UPDATE CLIENT', () => {
+describe('UPDATE CLIENT', () => {
     let res, resUpdate, resGet, resGetUpdate;
     before(async () => {
         res = await createClient(client);
