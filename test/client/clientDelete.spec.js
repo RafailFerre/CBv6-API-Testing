@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { client, createClient, deleteClient, getClient } from '../../helpers/client.js';
 
-describe.only('DELETE CLIENT', () => {
+describe('DELETE CLIENT', () => {
     let res, resDelete, resGet, resGetDelete;
     before(async () => {
         res = await createClient(client);
