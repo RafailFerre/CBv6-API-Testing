@@ -13,3 +13,18 @@ export function createClient(data) {
     .post('/client').set('Authorization', process.env.TOKEN)
     .send(data)
 }
+
+export function getClient(id) {
+    return request(process.env.BASE_URL)
+    .get(`/client/${id}`).set('Authorization', process.env.TOKEN)
+}
+
+export function deleteClient(id) {
+    return request(process.env.BASE_URL)
+    .delete(`/client/${id}`).set('Authorization', process.env.TOKEN)
+}
+
+export function updateClient(id, data) {
+    return request(process.env.BASE_URL)
+    .patch(`/client/${id}`).set('Authorization', process.env.TOKEN).send(data)
+}
