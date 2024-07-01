@@ -2,3 +2,5 @@ node_modules
 .idea
 .env
 Reports
+
+test/client/trashClientDelete.spec.js

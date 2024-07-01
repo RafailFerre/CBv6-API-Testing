@@ -28,3 +28,8 @@ export function updateClient(id, data) {
     return request(process.env.BASE_URL)
     .patch(`/client/${id}`).set('Authorization', process.env.TOKEN).send(data)
 }
+
+export function searchClient() {
+    return request(process.env.BASE_URL)
+    .post('/client/search').set('Authorization', process.env.TOKEN)//.send({limit: 3})
+}
