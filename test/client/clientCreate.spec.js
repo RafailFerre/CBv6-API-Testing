@@ -1,14 +1,20 @@
 import { expect } from 'chai';
-import { client, createClient } from '../../helpers/client.js';
+import { client, createClient, deleteClient } from '../../helpers/client.js';
 
 // const times = 3;
 // for (let i = 0; i <= times; i++) {console.log(`Run #${i}`)}
 describe('CLIENT CREATE', () => {
-    let res;
+    let res, resDel, id;
     describe('POSITIVE', () => {
         before(async () => {
             res = await createClient(client);
-        })
+            id = res.body.payload;
+            //console.log(id);
+        });
+        after(async() => {
+            resDel = await deleteClient(id);
+            //console.log(resDel.body);
+        });
         it('verify status code after client creating', () => {
             expect(res.status).to.equal(200);
         });

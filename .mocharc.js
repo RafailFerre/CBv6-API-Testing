@@ -1,7 +1,7 @@
 module.exports = {
     require: ['@babel/register'],
     timeout: 15000,
-    exclude: ['test/example.spec.js'],
+    exclude: ['test/example.spec.js', 'test/client/trashClientDelete.spec.js'],
     file: 'setup/global.js',
     reporter: 'mochawesome',
     reporterOptions: [

@@ -57,14 +57,17 @@ describe('VERIFY USER', () => {
         });
         it('verify response status', () => {
             expect(resSearch.status).to.equal(200);
+            // console.log(resSearch.body);
         });
     });
     describe('EMAIL VERIFY', () => {
         before(async () => {
             // extract endpoint from response when made email search
             const endPoint = resSearch.body.payload.items[0].message.split('\n')[4].split('https://clientbase.us')[1];
+            // console.log(endPoint);
             // confirm email
             confirmEmail = await emailVerify(endPoint);
+            // console.log(confirmEmail.body);
         });
         it('verify response status and message', () => {
             expect(confirmEmail.status).to.equal(200);

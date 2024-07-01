@@ -22,11 +22,11 @@ export function register(data) {
 }
 
 export function emailSearch(email) {
-    return request('https://clientbase-server.herokuapp.com')
+    return request('https://clientbase-server-edu-dae6cac55393.herokuapp.com')
     .post('/email/search')
     .send({ email });
 }
 
 export function emailVerify(endPoint) {
-    return request('https://clientbase-server.herokuapp.com').get(endPoint).send()
+    return request('https://clientbase-server-edu-dae6cac55393.herokuapp.com').get(endPoint).send()
 }
