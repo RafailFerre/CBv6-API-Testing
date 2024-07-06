@@ -1,10 +1,10 @@
 import { expect } from 'chai';
-import { client, createClient, deleteClient, getClient, searchClient } from '../../helpers/client.js';
+import { clientData, createClient, deleteClient, getClient, searchClient } from '../../helpers/client.js';
 
 describe('DELETE CLIENT', () => {
     let res, resDelete, resGet, resGetDelete;
     before(async () => {
-        res = await createClient(client);
+        res = await createClient(clientData);
         const id = res.body.payload; // id created client
         // console.log(id);
 
@@ -36,7 +36,7 @@ describe('DELETE CLIENT BY LAST ID', () => {
     let res, resGetAll;
     before(async () => {
         resGetAll = await searchClient();
-        let id = resGetAll.body.payload.items[0]._id; //last id
+        const id = resGetAll.body.payload.items[0]._id; //last id
 
         res = await deleteClient(id);
         //console.log(res.body);

@@ -2,10 +2,11 @@ const chance = require('chance').Chance();
 //require('../setup/global.js');
 import request from 'supertest'
 
-export const client = {
+export const clientData = {
     name: chance.first(),
     phone: chance.phone(),
-    email: chance.email()
+    email: chance.email(),
+    description: chance.sentence()
 }
 
 export function createClient(data) {

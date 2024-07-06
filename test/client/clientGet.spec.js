@@ -1,11 +1,10 @@
 import { expect } from 'chai'
-import { client, createClient, deleteClient, getClient, searchClient } from '../../helpers/client.js'
-import request from 'supertest'
+import { clientData, createClient, deleteClient, getClient, searchClient } from '../../helpers/client.js'
 
 describe('GET CLIENT', () => {
     let id, res, resGet, resGetAll, resDelete
     before(async () => {
-        res = await createClient(client)
+        res = await createClient(clientData)
         id = res.body.payload
 
         resGet = await getClient(id)
