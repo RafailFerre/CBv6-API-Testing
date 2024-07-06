@@ -31,5 +31,5 @@ export function updateClient(id, data) {
 
 export function searchClient() {
     return request(process.env.BASE_URL)
-    .post('/client/search').set('Authorization', process.env.TOKEN)//.send({limit: 3})
+    .post('/client/search').set('Authorization', process.env.TOKEN).send({limit: 100})
 }

@@ -8,7 +8,8 @@
         "test-signup": "mocha -- test/signup.spec.js",
         "test-client": "mocha -- test/client/*.spec.js",
         "test-multiple": "node run-tests-multiple.js",
-        "prettier": "npx prettier . --write"
+        "format": "npx prettier ./ --write --list-different",
+        "lint": "prettier ./ --check"
     },
     "keywords": [],
     "author": "Rafail Ferre",

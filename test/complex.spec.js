@@ -63,7 +63,7 @@ describe('VERIFY USER', () => {
     describe('EMAIL VERIFY', () => {
         before(async () => {
             // extract endpoint from response when made email search
-            const endPoint = resSearch.body.payload.items[0].message.split('\n')[4].split('https://clientbase.us')[1];
+            const endPoint = resSearch.body.payload.items[0].message.split('\n')[4].split('https://clientbase.pasv.us')[1];
             // console.log(endPoint);
             // confirm email
             confirmEmail = await emailVerify(endPoint);
