@@ -22,7 +22,7 @@ Required Environment:<br>
 - NodeJS - as code execution environment
 - Supertest - as HTTP client
 - Mocha - as a test runner tool
-- Chai as an assertion library
+- Chai - as an assertion library
 
 <br>
 
@@ -32,6 +32,9 @@ Required Environment:<br>
 - prettier - as a code refactoring tool
 - dotenv - as an environment variables library
 - newman - as a connection tool between IDE and Postman
+- newman-reporter-htmlextra - as a reporter Postman collection tests
+- mochawesome - as a reporter
+- chance - as a generator random data
 <br>
 
 #### *<font color="AntiqueWhite"> - author:</font>*
