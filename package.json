@@ -11,7 +11,7 @@
         "format": "npx prettier ./ --write --list-different",
         "lint": "prettier ./ --check",
         "pm:run": "newman run postman/CBv6.postman_collection.json -e postman/ClientBaseV6.postman_environment.json",
-        "pm:report": "newman run postman/CBv6.postman_collection.json -e postman/ClientBase.v6.postman_environment.json -r htmlextra --reporter-htmlextra-export PmReports/pmReport.html"
+        "pm:report": "newman run postman/CBv6.postman_collection.json -e postman/ClientBaseV6.postman_environment.json -r htmlextra --reporter-htmlextra-export pm-reports/pmReport.html"
     },
     "keywords": [],
     "author": "Rafail Ferre",
