@@ -7,7 +7,7 @@ module.exports = {
     reporterOptions: [
         'json=false',
         'quiet=true',
-        'reportDir=Reports',
+        'reportDir=reports',
         'reportFilename=[status]_updatedReports',
     ],
 };

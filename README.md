@@ -1,4 +1,4 @@
-## <font color="Gray"> API-CBv6-V2 </font>
+## <font color="Gray"> API-CBv6 </font>
 
 ---
 

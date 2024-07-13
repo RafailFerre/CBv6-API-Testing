@@ -1,7 +1,7 @@
 node_modules
 .idea
 .env
-Reports
-PmReports
+reports
+pm-reports
 
 test/client/trashClientDelete.spec.js

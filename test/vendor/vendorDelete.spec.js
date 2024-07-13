@@ -7,7 +7,6 @@ describe('DELETE VENDOR', () => {
 
     describe('POSITIVE: DELETE VENDOR BY ID', () => {
         before(async() => {
-
         const vendorId = (await vendorHelper.createVendor(vendorHelper.vendorData)).body.payload
 
         res = await vendorHelper.deleteVendor(vendorId)
@@ -27,7 +26,6 @@ describe('DELETE VENDOR', () => {
 
     describe('NEGATIVE: DELETE VENDOR WITH INVALID ID', () => {
         before(async() => {
-
         const inavalidVendorId = (await vendorHelper.createVendor(vendorHelper.vendorData)).body.payload + 'invalid'
         
         res = await vendorHelper.deleteVendor(inavalidVendorId)
@@ -43,7 +41,6 @@ describe('DELETE VENDOR', () => {
 
     describe('NEGATIVE: DELETE VENDOR WITHOUT ID', () => {
         before(async() => {
-
         const vendorId = (await vendorHelper.createVendor(vendorHelper.vendorData)).body.payload
         
         res = await vendorHelper.deleteVendor()
@@ -59,12 +56,11 @@ describe('DELETE VENDOR', () => {
 
     describe('NEGATIVE: DELETE VENDOR WHEN VENDOR ALREADY DELETED', () => {
         before(async() => {
-
         const vendorId = (await vendorHelper.createVendor(vendorHelper.vendorData)).body.payload
         
         res = await vendorHelper.deleteVendor(vendorId)
-
-        res = await vendorHelper.deleteVendor(vendorId)
+    
+        res = await vendorHelper.deleteVendor(vendorId) // second delete request
         });
 
         it('verify status code', async () => {
