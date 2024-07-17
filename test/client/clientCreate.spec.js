@@ -27,7 +27,7 @@ describe('CLIENT CREATE', () => {
         })
         describe('CREATE CLIENT WITH REQUIRED DATA: NAME AND PHONE', () => {
             before(async () => {
-                res = await clientHelper.createClient({ ...clientHelper.clientData, name: chance.first(), phone: chance.phone() })
+                res = await clientHelper.createClient({ ...clientHelper.clientData, name: chance.first(), phone: chance.phone(), email: '', description: '' })
                 id = res.body.payload
                 // console.log(id);
                 // console.log(res.request._data);
@@ -72,3 +72,29 @@ describe('CLIENT CREATE', () => {
         })
     })
 })
+
+
+describe('Create client through api', () => {
+    let id, res, resGet, resDel;
+    before(async () => {
+        res = await clientHelper.createClientAuth(clientHelper.clientData)
+        // console.log(res.body)
+        id = res.body.payload
+    });
+    
+    after(async () => {
+        resDel = await clientHelper.deleteClientAuth(id);
+
+        resGet = await clientHelper.getClient(id);
+        // console.log(resGet.body);
+    });
+    
+    it('verify status code', async () => {
+            expect(res.status).to.equal(200);
+    
+    })
+    
+    it('verify response message', async () => {
+            expect(res.body.message).to.equal('Client created');    
+    })
+});

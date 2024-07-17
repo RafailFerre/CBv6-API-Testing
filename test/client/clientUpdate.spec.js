@@ -2,10 +2,10 @@ import { expect } from 'chai'
 import { clientData, createClient, getClient, updateClient, deleteClient } from '../../helpers/client.js'
 
 describe('UPDATE CLIENT', () => {
-    let res, resUpdate, resGet, resGetUpdate
+    let id, res, resUpdate, resGet, resGetUpdate
     before(async () => {
         res = await createClient(clientData)
-        const id = res.body.payload
+        id = res.body.payload
 
         resGet = await getClient(id)
         // console.log(resGet.body);
@@ -18,12 +18,15 @@ describe('UPDATE CLIENT', () => {
             description: 'new description',
         })
         // console.log(resUpdate.body);
-    after(async () => {
-        await deleteClient(id)
-    })
+   
         resGetUpdate = await getClient(id)
         // console.log(resGetUpdate.body);
     })
+
+    after(async () => {
+        await deleteClient(id)
+    })
+
     it('verify status code after client updating', () => {
         expect(resUpdate.status).to.equal(200)
     })
