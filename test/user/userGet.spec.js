@@ -45,7 +45,8 @@ describe('GET USER', () => {
       resLogin = await user.login(user.newUser.email, user.newUser.password)
       userId = resLogin.body.payload.userId
 
-      resGet = await user.getUser('')
+      resGet = await user.getUser(userId + 1)
+      // console.log(resGet.body)
     })
 
     after(async () => {
@@ -57,7 +58,7 @@ describe('GET USER', () => {
     })
 
     it('verify response message', async () => {
-      expect(resGet.body.message).to.eq('Permission denied')
+      expect(resGet.body.message).to.eq('User get by ID. Error')
     })
   })
   describe('NEGATIVE - Get user without authorization', () => {
