@@ -78,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"companyname\": \"Gym\",\r\n    \"email\": \"vasyafit@gmail.com\",\r\n    \"firstName\": \"Vasya\",\r\n    \"lastName\": \"Pupkin\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"companyname\": \"Gym\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"firstName\": \"Vasya\",\r\n    \"lastName\": \"Pupkin\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -142,61 +142,6 @@
 					"response": []
 				},
 				{
-					"name": "Create User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"const res = JSON.parse(responseBody);\r",
-									"\r",
-									"const responseData = pm.response.json()\r",
-									"// console.log(responseData, '**************** RESPONSE DATA ***************')\r",
-									"let requestData = JSON.parse(pm.request.body);\r",
-									"// console.log(requestData, '++++++++++++++++++ REQUEST DATA ++++++++++++++++++')\r",
-									"\r",
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Body matches string\", function () {\r",
-									"    pm.expect(res.message).to.eq(\"User created successfully. Please check your email and verify it\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response body message\", function () {\r",
-									"    pm.expect(pm.response.json().message).to.eq(\"User created successfully. Please check your email and verify it\");\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"companyname\": \"{{$randomCompanyName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"password\": \"12345\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/user",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "User Login",
 					"event": [
 						{
@@ -204,6 +149,8 @@
 							"script": {
 								"exec": [
 									"pm.environment.set(\"tokenV6\", pm.response.json().payload.token)\r",
+									"pm.environment.set('userMainID', pm.response.json().payload.userId)\r",
+									"pm.environment.set('companyID', pm.response.json().payload.user.companyAccount)\r",
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -216,7 +163,9 @@
 									"const responseData = pm.response.json()\r",
 									"// console.log(responseData, '**************** RESPONSE DATA ***************')\r",
 									"let requestData = JSON.parse(pm.request.body);\r",
-									"// console.log(requestData, '++++++++++++++++++ REQUEST DATA ++++++++++++++++++')"
+									"// console.log(requestData, '++++++++++++++++++ REQUEST DATA ++++++++++++++++++')\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -349,6 +298,455 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create Random User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//const res = JSON.parse(responseBody)\r",
+									"//console.log(res)\r",
+									"\r",
+									"const responseData = pm.response.json()\r",
+									"console.log(responseData, '**************** RESPONSE DATA ***************')\r",
+									"\r",
+									"const requestData = JSON.parse(pm.request.body);\r",
+									"console.log(requestData, '++++++++++++++++++ REQUEST DATA ++++++++++++++++++')\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body message\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.eq(\"User created successfully. Please check your email and verify it\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"userEmail\", requestData.email);\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyName\": \"5555555555555\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email User Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"LOGIN response body message\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.eq(\"EmailSearch ok\");\r",
+									"});\r",
+									"\r",
+									"const responseData = pm.response.json()\r",
+									"// console.log(responseData, '**************** RESPONSE DATA ***************')\r",
+									"let requestData = JSON.parse(pm.request.body);\r",
+									"// console.log(requestData, '++++++++++++++++++ REQUEST DATA ++++++++++++++++++')\r",
+									"\r",
+									"pm.environment.set(\"endPoint\", responseData.payload.items[0].message.split('\\n')[4].split('https://clientbase.pasv.us')[1]);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{userEmail}}\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://clientbase-server-edu-dae6cac55393.herokuapp.com/email/search",
+							"protocol": "https",
+							"host": [
+								"clientbase-server-edu-dae6cac55393",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"email",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email User Confirmation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Email confirmation response body message\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal(\"Email confirmed. Success\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"const responseData = pm.response.json()\r",
+									"console.log(responseData, '**************** RESPONSE DATA ***************')\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://clientbase-server-edu-dae6cac55393.herokuapp.com{{endPoint}}",
+							"protocol": "https",
+							"host": [
+								"clientbase-server-edu-dae6cac55393",
+								"herokuapp",
+								"com{{endPoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Random User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"userToken\", pm.response.json().payload.token)\r",
+									"pm.environment.set('userID', pm.response.json().payload.userId)\r",
+									"pm.environment.set('companyID', pm.response.json().payload.user.companyAccount)\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"LOGIN response body message\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.eq(\"Auth success\");\r",
+									"});\r",
+									"\r",
+									"const responseData = pm.response.json()\r",
+									"console.log(responseData, '**************** RESPONSE DATA ***************')\r",
+									"\r",
+									"let requestData = JSON.parse(pm.request.body);\r",
+									"console.log(requestData, '++++++++++++++++++ REQUEST DATA ++++++++++++++++++')"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{userEmail}}\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Random User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json()\r",
+									"console.log(res)\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response message\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.eq(\"User found\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/{{userID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json()\r",
+									"console.log(res)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/search",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Random User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"new@new.new\",\r\n    \"firstName\": \"NEW-NAME\",\r\n    \"lastName\": \"NEW\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/{{userID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Random User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json()\r",
+									"console.log(res)\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify response message\", function () {\r",
+									"   pm.expect(pm.response.json().message).to.eq(\"User deleted\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/{{userID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -376,7 +774,7 @@
 									"// console.log(requestData, '++++++++++++++++++ REQUEST DATA ++++++++++++++++++')\r",
 									"\r",
 									"const responseData = pm.response.json()\r",
-									"// console.log(responseData, '**************** RESPONSE DATA ***************')"
+									"console.log(responseData, '**************** RESPONSE DATA ***************')"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -464,7 +862,7 @@
 					"response": []
 				},
 				{
-					"name": "Client ID",
+					"name": "Get Client by ID",
 					"event": [
 						{
 							"listen": "test",
@@ -665,6 +1063,119 @@
 							"path": [
 								"client",
 								"{{clientID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Get Company by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body message\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.eq(\"Company Account get by id OK\");\r",
+									"})\r",
+									"\r",
+									"const responseData = pm.response.json()\r",
+									"console.log(responseData, '**************** RESPONSE DATA ***************')"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/company/{{companyID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"company",
+								"{{companyID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Company",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body message\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.eq(\"Company Account updated\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{tokenV6}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyName\": \"?????????????? NEW COMPANY !!!!!!!!!!\",\r\n    \"email\": \"test@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/company/{{companyID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"company",
+								"{{companyID}}"
 							]
 						}
 					},

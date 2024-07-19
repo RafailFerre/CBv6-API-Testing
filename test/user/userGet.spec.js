@@ -38,6 +38,7 @@ describe('GET USER', () => {
       expect(resGet.body.payload.roles).to.include('new')
     })
   })
+  
   describe('NEGATIVE - Get user with invalid id', () => {
     before(async () => {
       await user.signup(user.newUser)
@@ -45,7 +46,8 @@ describe('GET USER', () => {
       resLogin = await user.login(user.newUser.email, user.newUser.password)
       userId = resLogin.body.payload.userId
 
-      resGet = await user.getUser(userId + 1)
+      const invalidUserId = userId + '1'
+      resGet = await user.getUser(invalidUserId)
       // console.log(resGet.body)
     })
 
@@ -61,6 +63,7 @@ describe('GET USER', () => {
       expect(resGet.body.message).to.eq('User get by ID. Error')
     })
   })
+
   describe('NEGATIVE - Get user without authorization', () => {
     before(async () => {
       await user.signup(user.newUser)

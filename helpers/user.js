@@ -49,7 +49,7 @@ export function login(email, password) {
 
 export function deleteUser(userId){
     return request(process.env.BASE_URL)
-    .delete('/user/'+userId).set('Authorization', process.env.TOKEN)
+    .delete('/user/' + userId).set('Authorization', process.env.TOKEN)
   }
 
   export function getUserNoAuth(userId){
