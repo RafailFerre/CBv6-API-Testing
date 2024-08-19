@@ -9,7 +9,15 @@ export const user = {
 }
 
 // signup body for new user in test signup
+export const userData = {
+  firstName: chance.first(), 
+  lastName: chance.last(), 
+  email: chance.email(), 
+  password: process.env.PASSWORD 
+}
+
 export const newUser = {
+    companyName: chance.company(),
     firstName: chance.first(), 
     lastName: chance.last(), 
     email: chance.email(), 
@@ -35,6 +43,10 @@ export function login(email, password) {
     return request(process.env.BASE_URL)
       .post('/user/login')
       .send({ email, password });
+  }
+
+  export const userId = async () => {
+    return (await login(newUser.email, newUser.password)).body.payload.userId; 
   }
 
   export function getUser(userId){

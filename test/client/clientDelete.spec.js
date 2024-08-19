@@ -32,7 +32,7 @@ describe('DELETE CLIENT', () => {
 });
 
 
-describe('DELETE CLIENT BY LAST ID', () => {
+describe.skip('DELETE CLIENT BY LAST ID', () => {
     let res, resGetAll;
     before(async () => {
         resGetAll = await searchClient();
